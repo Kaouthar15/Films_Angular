@@ -44,4 +44,22 @@ export const routes: Routes = [
         (m) => m.RatingsComponent
       ),
   },
+  {
+    path: 'login',
+    loadComponent: () =>
+      import('./pages/auth/login/login.component').then(
+        (m) => m.LoginComponent
+      ),
+    title: 'book store - login',
+    // canActivate: [authGuard],
+  },
+  {
+    path: 'signup',
+    loadComponent: () =>
+      import('./pages/auth/signup/signup.component').then(
+        (m) => m.SignupComponent
+      ),
+    title: 'book store - signup',
+    // canActivate: [authGuard],
+  },
 ];
