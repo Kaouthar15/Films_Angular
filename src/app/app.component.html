@@ -1,8 +1,7 @@
 @if(router.url !== '/login' && router.url !== '/signup'){
 <app-navbar />
 }
-<main class="mt-16">
-      <router-outlet />
-
+<main [class.mt-16]="router.url !== '/login' && router.url !== '/signup'">
+      <router-outlet></router-outlet>
 </main>
 <app-footer />

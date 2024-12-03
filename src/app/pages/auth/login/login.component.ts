@@ -11,7 +11,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
   standalone: true,
   imports: [CommonModule, RouterModule, FontAwesomeModule, ReactiveFormsModule],
   templateUrl: './login.component.html',
-  styleUrl: '../auth.scss',
+  styleUrl: '../auth.css',
 })
 export class LoginComponent {
   pswIcon = faLock;

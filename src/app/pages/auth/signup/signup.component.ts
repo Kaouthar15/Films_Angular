@@ -10,6 +10,7 @@ import {
   faPhone,
   faUser,
   faGlobe,
+  faFilm,
 } from '@fortawesome/free-solid-svg-icons';
 import { matchPasswords } from './match-passwords.validator';
 import { Router, RouterModule } from '@angular/router';
@@ -26,13 +27,14 @@ import { TrimInputDirective } from '../trim-input.directive';
     RouterModule,
   ],
   templateUrl: './signup.component.html',
-  styleUrl: '../auth.scss',
+  styleUrl: '../auth.css',
 })
 export class SignupComponent {
   fb = inject(FormBuilder);
   authService = inject(AuthService);
   destroy = inject(DestroyRef);
   router = inject(Router);
+  filmIcon = faFilm;
   // notificationStore = inject(NotificationStore);
   maxLengths = {
     firstName: 50,
