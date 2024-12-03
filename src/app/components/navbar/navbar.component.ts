@@ -26,8 +26,6 @@ export class NavbarComponent {
   destroy = inject(DestroyRef);
   router = inject(Router);
 
-  showCart: WritableSignal<boolean> = signal(false);
-  showInbox: WritableSignal<boolean> = signal(false);
   isMenuOpen: WritableSignal<boolean> = signal(false);
 
   menuIcon = faBars;
@@ -44,21 +42,6 @@ export class NavbarComponent {
     if (!menuDiv?.contains(targetElement)) {
       this.toggleMenu();
     }
-  }
-
-  openCart() {
-    this.showCart.set(true);
-  }
-
-  closeCart() {
-    this.showCart.set(false);
-  }
-  openInbox() {
-    this.showInbox.set(true);
-  }
-
-  closeInbox() {
-    this.showInbox.set(false);
   }
 
   logout() {
