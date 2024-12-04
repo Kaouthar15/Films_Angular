@@ -1,0 +1,62 @@
+/* General Styles */
+body {
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    background: #f0f8ff; /* Light blue background */
+    color: #1a3b5d; /* Dark blue text */
+  }
+  
+  .home-container {
+    text-align: center;
+    padding: 20px;
+  }
+  
+  /* Header Styles */
+  .home-header {
+    background: linear-gradient(135deg, #007bff, #0056b3); /* Blue gradient */
+    padding: 40px 20px;
+    border-radius: 10px;
+    margin-bottom: 40px;
+    color: #ffffff;
+  }
+  
+  .home-header h1 {
+    font-size: 3em;
+    margin: 0;
+  }
+  
+  .home-header p {
+    font-size: 1.2em;
+    margin-top: 10px;
+  }
+  
+  /* Content Section */
+  .home-content {
+    margin: 20px auto;
+  }
+  
+  .home-content p {
+    font-size: 1.4em;
+    margin-bottom: 20px;
+    color: #1a3b5d;
+  }
+  
+  /* Button Styles */
+  .explore-button {
+    font-size: 1.2em;
+    padding: 12px 25px;
+    background: #007bff; /* Blue button */
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-transform: uppercase;
+    font-weight: bold;
+    transition: background 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .explore-button:hover {
+    background: #0056b3; /* Darker blue on hover */
+  }
+  
