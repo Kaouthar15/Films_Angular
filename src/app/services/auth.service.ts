@@ -12,7 +12,7 @@ import {
   throwError,
 } from 'rxjs';
 import { environment } from '../../environment/environment';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 export interface LogoutResponse {
   message: string;
@@ -27,6 +27,10 @@ export interface LoginPayload {
   username: string;
   password: string;
 }
+
+const http_header = new HttpHeaders({
+  Headers: 'Access-Control-Allow-Origin : http://localhost:4200',
+});
 @Injectable({
   providedIn: 'root',
 })
@@ -70,7 +74,13 @@ export class AuthService {
 
   login(formData: LoginPayload): Observable<AuthResponse> {
     return this.http
-      .post<AuthResponse>(`${environment.API_URL}/auth/login`, formData)
+      .post<AuthResponse>(
+        `${environment.API_URL}/auth/authenticate`,
+        formData,
+        {
+          headers: http_header,
+        }
+      )
       .pipe(
         tap((response) => {
           this.setAccessToken(response.jwt);

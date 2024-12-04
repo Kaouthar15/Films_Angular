@@ -21,6 +21,7 @@ export class LoginComponent {
   destroy = inject(DestroyRef);
   authService = inject(AuthService);
   router = inject(Router);
+
   loginForm = this.fb.nonNullable.group({
     username: ['', Validators.required],
     password: ['', Validators.required],
