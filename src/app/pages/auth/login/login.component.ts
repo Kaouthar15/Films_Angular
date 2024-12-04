@@ -5,6 +5,7 @@ import { faLock, faUser } from '@fortawesome/free-solid-svg-icons';
 import { AuthService } from '../../../services/auth.service';
 import { Router, RouterModule } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-login',
@@ -20,25 +21,24 @@ export class LoginComponent {
   destroy = inject(DestroyRef);
   authService = inject(AuthService);
   router = inject(Router);
-  // notificationStore = inject(NotificationStore);
   loginForm = this.fb.nonNullable.group({
     username: ['', Validators.required],
     password: ['', Validators.required],
   });
 
   onSubmit(): void {
-    // this.authService
-    //   .login(this.loginForm.getRawValue())
-    //   .pipe(takeUntilDestroyed(this.destroy))
-    //   .subscribe({
-    //     next: () => {
-    //       this.notificationStore.notify(
-    //         "You're logged in successfully",
-    //         NotificationType.SUCCESS
-    //       );
-    //       this.router.navigate(['/']);
-    //     },
-    //   });
+    this.authService
+      .login(this.loginForm.getRawValue())
+      .pipe(takeUntilDestroyed(this.destroy))
+      .subscribe({
+        next: () => {
+          // this.notificationStore.notify(
+          //   "You're logged in successfully",
+          //   NotificationType.SUCCESS
+          // );
+          this.router.navigate(['/']);
+        },
+      });
   }
   public isInvalidInput(inputName: string): boolean {
     return !!(

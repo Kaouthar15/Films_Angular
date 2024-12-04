@@ -38,54 +38,6 @@
                               </div>
                         </div>
 
-                        <!-- First Name -->
-                        <div class="mb-5">
-                              <label class="block text-gray-700 text-xs font-bold mb-1" for="firstName">
-                                    First Name
-                              </label>
-                              <div class="relative">
-                                    <fa-icon [icon]="userIcon"
-                                          class="absolute top-1/2 transform -translate-y-1/2 left-2 text-gray-400"></fa-icon>
-                                    <input type="text" trimInput id="firstName" formControlName="firstName"
-                                          class="w-full pl-8 pr-2 py-1.5 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-blue-500"
-                                          placeholder="Enter your first name" />
-                              </div>
-                              <div class="text-red-500 text-xs h-4 ">
-                                    @if (isInvalidInput('firstName')) {
-
-                                    <span class="" *ngIf="signupForm.get('firstName')?.hasError('required')">
-                                          First Name is required.
-                                    </span>
-                                    <span class="" *ngIf="signupForm.get('firstName')?.hasError('maxlength')">
-                                          First Name cannot be more than {{ maxLengths.firstName }} characters long.
-                                    </span>
-                                    }
-                              </div>
-                        </div>
-
-                        <!-- Last Name -->
-                        <div class="mb-5">
-                              <label class="block text-gray-700 text-xs font-bold mb-1" for="lastName">
-                                    Last Name
-                              </label>
-                              <div class="relative">
-                                    <fa-icon [icon]="userIcon"
-                                          class="absolute top-1/2 transform -translate-y-1/2 left-2 text-gray-400"></fa-icon>
-                                    <input type="text" trimInput id="lastName" formControlName="lastName"
-                                          class="w-full pl-8 pr-2 py-1.5 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-blue-500"
-                                          placeholder="Enter your last name" />
-                              </div>
-                              <div class="text-red-500 text-xs h-4">
-                                    @if (isInvalidInput('lastName')) {
-                                    <span class="" *ngIf="signupForm.get('lastName')?.hasError('required')">
-                                          Last Name is required.
-                                    </span>
-                                    <span class="" *ngIf="signupForm.get('lastName')?.hasError('maxlength')">
-                                          Last Name cannot be more than {{ maxLengths.lastName }} characters long.
-                                    </span>
-                                    }
-                              </div>
-                        </div>
 
                         <!-- Email -->
                         <div class="mb-5">
@@ -114,56 +66,7 @@
                   </div>
                   <div class="px-4 flex-grow md:max-w-[343px] ">
 
-                        <!-- Phone -->
-                        <div class="mb-5">
-                              <label class="block text-gray-700 text-xs font-bold mb-1" for="phone">
-                                    Phone Number
-                              </label>
-                              <div class="relative">
-                                    <fa-icon [icon]="phoneIcon"
-                                          class="absolute top-1/2 transform -translate-y-1/2 left-2 text-gray-400"></fa-icon>
-                                    <input type="text" trimInput id="phone" formControlName="phone"
-                                          class="w-full pl-8 pr-2 py-1.5 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-blue-500"
-                                          placeholder="Enter your phone number" />
-                              </div>
-                              <div class="text-red-500 text-xs h-4">
-                                    @if (isInvalidInput('phone')) {
-                                    <span class="" *ngIf="signupForm.get('phone')?.hasError('required')">
-                                          Phone number is required.
-                                    </span>
-                                    <span class="" *ngIf="signupForm.get('phone')?.hasError('pattern')">
-                                          Phone number should start with 0 and be 10 digits
-                                    </span>
 
-
-                                    }
-                              </div>
-                        </div>
-
-                        <!-- Country -->
-                        <div class="mb-5">
-                              <label class="block text-gray-700 text-xs font-bold mb-1" for="country">
-                                    Country
-                              </label>
-                              <div class="relative">
-                                    <fa-icon [icon]="countryIcon"
-                                          class="absolute top-1/2 transform -translate-y-1/2 left-2 text-gray-400"></fa-icon>
-                                    <input type="text" trimInput id="country" formControlName="country"
-                                          class="w-full pl-8 pr-2 py-1.5 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-blue-500"
-                                          placeholder="Enter your country" />
-                              </div>
-                              <div class="text-red-500 text-xs h-4">
-                                    @if (isInvalidInput('country')) {
-
-                                    <span class="" *ngIf="signupForm.get('country')?.hasError('required')">
-                                          Country is required.
-                                    </span>
-                                    <span class="" *ngIf="signupForm.get('country')?.hasError('maxlength')">
-                                          Country cannot be more than {{ maxLengths.country }} characters long.
-                                    </span>
-                                    }
-                              </div>
-                        </div>
 
                         <!-- Password -->
                         <div class="mb-5">
