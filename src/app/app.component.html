@@ -1,7 +1,16 @@
-@if(router.url !== '/login' && router.url !== '/signup'){
-<app-navbar />
-}
-<main [class.mt-16]="router.url !== '/login' && router.url !== '/signup'">
-      <router-outlet></router-outlet>
-</main>
-<app-footer />
+@let isAuthPage = router.url === '/login' || router.url === '/signup';
+<div class="flex flex-col min-h-screen justify-between">
+
+
+      @if(!isAuthPage){
+      <app-navbar />
+      }
+      <main class="min-h-" [class.mt-16.mb-24]="!isAuthPage">
+            <router-outlet></router-outlet>
+      </main>
+      @if(!isAuthPage){
+
+      <app-footer />
+      }
+
+</div>

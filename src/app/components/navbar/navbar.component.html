@@ -1,5 +1,5 @@
 <nav id="navDiv"
-      class="px-4 py-1 flex justify-between items-center h-15 fixed z-10 w-full shadow-sm top-0 transition-all bg-gray-50">
+      class="px-4 py-1 flex justify-between items-center h-16 fixed z-10 w-full shadow-sm top-0 transition-all bg-gray-50">
       <!-- Logo Section -->
       <a routerLink="/home" class="flex items-center">
             <img src="logo.png" alt="Logo" class="w-14 h-14">
@@ -7,14 +7,15 @@
 
       <!-- Hamburger Menu Button -->
       <div class="flex md:hidden">
-            <button id="closeMenu" (click)="toggleMenu()"
-                  class="text-gray-600 hover:text-gray-800 focus:outline-none transition-colors z-50">
+            <button id="closeMenu" (click)="toggleMenu()" class="z-50">
                   @if (!isMenuOpen()) {
 
-                  <fa-icon [icon]="menuIcon" class="text-2xl"></fa-icon>
+                  <fa-icon [icon]="menuIcon"
+                        class="text-2xl text-gray-600 hover:text-gray-800 focus:outline-none transition-colors"></fa-icon>
                   }@else {
 
-                  <fa-icon [icon]="xMarkIcon" class="text-2xl"></fa-icon>
+                  <fa-icon [icon]="xMarkIcon"
+                        class="text-2xl text-gray-600 hover:text-gray-200 focus:outline-none transition-colors"></fa-icon>
                   }
 
             </button>
@@ -35,15 +36,15 @@
                   </a>
             </li>
             <li>
-                  <a routerLink="/ratings"
-                        class="flex text-md px-4 py-2 rounded font-semibold text-gray-600 hover:bg-gray-200 hover:text-gray-900 transition-colors">
-                        Ratings
-                  </a>
-            </li>
-            <li>
                   <a routerLink="/directors"
                         class="flex text-md px-4 py-2 rounded font-semibold text-gray-600 hover:bg-gray-200 hover:text-gray-900 transition-colors">
                         Directors
+                  </a>
+            </li>
+            <li>
+                  <a routerLink="/ratings"
+                        class="flex text-md px-4 py-2 rounded font-semibold text-gray-600 hover:bg-gray-200 hover:text-gray-900 transition-colors">
+                        Ratings
                   </a>
             </li>
 
@@ -68,7 +69,8 @@
             <div id="menuDiv" (click)="$event.stopPropagation()"
                   [ngClass]="{ 'w-60': isMenuOpen(), 'w-0': !isMenuOpen() }"
                   class="side-menu w-64 flex flex-col bg-gray-800 absolute top-0 right-0 h-full shadow-sm overflow-hidden transition-all pt-20">
-                  <div class="flex-1">
+                  <div class="flex-1 flex flex-col justify-between h-full">
+                        <!-- Pages' Links -->
                         <ul class="flex flex-col space-y-4 px-4 py-4 h-full">
                               <li>
                                     <a routerLink="/films"
@@ -83,23 +85,23 @@
                                     </a>
                               </li>
                               <li>
-                                    <a routerLink="/ratings"
-                                          class="flex text-md px-4 py-2 rounded font-semibold text-gray-300 hover:bg-gray-700 hover:text-white transition-colors w-full">
-                                          Ratings
-                                    </a>
-                              </li>
-                              <li>
                                     <a routerLink="/directors"
                                           class="flex text-md px-4 py-2 rounded font-semibold text-gray-300 hover:bg-gray-700 hover:text-white transition-colors w-full">
                                           Directors
                                     </a>
                               </li>
                               <li>
-                                    <a routerLink="/login"
+                                    <a routerLink="/ratings"
                                           class="flex text-md px-4 py-2 rounded font-semibold text-gray-300 hover:bg-gray-700 hover:text-white transition-colors w-full">
-                                          login
+                                          Ratings
                                     </a>
                               </li>
+
+                        </ul>
+
+                        <!-- Auth Links -->
+                        <ul class="flex flex-col justify-end space-y-4 px-4 py-4 h-full">
+
                               <li>
                                     <a routerLink="/signup"
                                           class="flex text-md font-semibold bg-blue-400 text-blue-900 px-4 py-2 rounded-md hover:bg-blue-300 transition-colors w-full">

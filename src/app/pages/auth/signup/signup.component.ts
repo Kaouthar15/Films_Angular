@@ -37,29 +37,17 @@ export class SignupComponent {
   filmIcon = faFilm;
   // notificationStore = inject(NotificationStore);
   maxLengths = {
-    firstName: 50,
-    lastName: 50,
     username: 20,
     password: 8,
-    country: 100,
   };
 
   minLengths = {
     username: 3,
     password: 8,
-    phone: 10,
   };
 
   signupForm = this.fb.nonNullable.group(
     {
-      firstName: [
-        '',
-        [Validators.required, Validators.maxLength(this.maxLengths.firstName)],
-      ],
-      lastName: [
-        '',
-        [Validators.required, Validators.maxLength(this.maxLengths.lastName)],
-      ],
       username: [
         '',
         [
@@ -74,11 +62,6 @@ export class SignupComponent {
       ],
       confirmPassword: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]],
-      phone: ['', [Validators.required, Validators.pattern(/^0\d{9}$/)]],
-      country: [
-        '',
-        [Validators.required, Validators.maxLength(this.maxLengths.country)],
-      ],
     },
     {
       validators: matchPasswords,
