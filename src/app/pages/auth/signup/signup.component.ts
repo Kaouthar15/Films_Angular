@@ -15,10 +15,15 @@ import {
 import { matchPasswords } from './match-passwords.validator';
 import { Router, RouterModule } from '@angular/router';
 import { TrimInputDirective } from '../trim-input.directive';
+import {
+  NotificationStore,
+  NotificationType,
+} from '../../../store/notification.store';
+import { RegisterPayload } from '../../../models/user.model';
 
 @Component({
-  selector: 'app-signup',
   standalone: true,
+  selector: 'app-signup',
   imports: [
     CommonModule,
     ReactiveFormsModule,
@@ -35,7 +40,7 @@ export class SignupComponent {
   destroy = inject(DestroyRef);
   router = inject(Router);
   filmIcon = faFilm;
-  // notificationStore = inject(NotificationStore);
+  notificationStore = inject(NotificationStore);
   maxLengths = {
     username: 20,
     password: 8,
@@ -74,20 +79,20 @@ export class SignupComponent {
   countryIcon = faGlobe;
 
   onSubmit() {
-    // const dataToSubmit = <RegisterPayload>this.signupForm.getRawValue();
-    // delete dataToSubmit.confirmPassword;
-    // this.authService
-    //   .register(dataToSubmit)
-    //   .pipe(takeUntilDestroyed(this.destroy))
-    //   .subscribe({
-    //     next: () => {
-    //       this.notificationStore.notify(
-    //         'You are now registered',
-    //         NotificationType.SUCCESS
-    //       );
-    //       this.router.navigate(['/']);
-    //     },
-    //   });
+    const dataToSubmit = <RegisterPayload>this.signupForm.getRawValue();
+    delete dataToSubmit.confirmPassword;
+    this.authService
+      .register(dataToSubmit)
+      .pipe(takeUntilDestroyed(this.destroy))
+      .subscribe({
+        next: () => {
+          this.notificationStore.notify(
+            'You are now registered',
+            NotificationType.SUCCESS
+          );
+          this.router.navigate(['/']);
+        },
+      });
   }
 
   public isInvalidInput(inputName: string): boolean {

@@ -1,7 +1,7 @@
 import {
+  APP_INITIALIZER,
   ApplicationConfig,
   inject,
-  provideAppInitializer,
   provideZoneChangeDetection,
 } from '@angular/core';
 import { provideRouter } from '@angular/router';
@@ -16,10 +16,20 @@ export const appConfig: ApplicationConfig = {
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
     provideHttpClient(withInterceptors([authInterceptor])),
-    provideAppInitializer(() => {
-      const authService = inject(AuthService);
-
-      return authService.initializeUser();
-    }),
+    {
+      provide: APP_INITIALIZER,
+      useFactory: (authService: AuthService) => async () => {
+        try {
+          // Try to load the user from http call to the server
+          // if some error happens, We catch this error and do nothing, so the app doesn't crash
+          await authService.initializeUser();
+        } catch (error) {
+          // if there is an error, log it
+          console.error('Failed to load user:', error);
+        }
+      },
+      deps: [AuthService],
+      multi: true,
+    },
   ],
 };

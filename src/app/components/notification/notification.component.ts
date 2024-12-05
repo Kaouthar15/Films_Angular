@@ -26,8 +26,8 @@ import { Router } from '@angular/router';
 import { filter, tap } from 'rxjs';
 
 @Component({
-  selector: 'app-notification',
   standalone: true,
+  selector: 'app-notification',
   imports: [CommonModule, FontAwesomeModule],
   templateUrl: './notification.component.html',
   styleUrl: './notification.component.scss',

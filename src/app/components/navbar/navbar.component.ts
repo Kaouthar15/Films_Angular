@@ -16,8 +16,13 @@ import {
 } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
+import {
+  NotificationStore,
+  NotificationType,
+} from '../../store/notification.store';
 
 @Component({
+  standalone: true,
   selector: 'app-navbar',
   imports: [CommonModule, RouterModule, FontAwesomeModule],
   templateUrl: './navbar.component.html',
@@ -27,6 +32,7 @@ export class NavbarComponent {
   destroy = inject(DestroyRef);
   router = inject(Router);
   authService = inject(AuthService);
+  notificationStore = inject(NotificationStore);
 
   isMenuOpen: WritableSignal<boolean> = signal(false);
 
@@ -47,7 +53,14 @@ export class NavbarComponent {
   }
 
   logout() {
-    this.authService.logout().subscribe();
+    this.authService.logout().subscribe({
+      next: () => {
+        this.notificationStore.notify(
+          'Logged Out Successfully',
+          NotificationType.SUCCESS
+        );
+      },
+    });
   }
 
   @HostListener('document:scroll')

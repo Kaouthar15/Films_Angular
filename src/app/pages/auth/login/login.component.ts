@@ -6,10 +6,14 @@ import { AuthService } from '../../../services/auth.service';
 import { Router, RouterModule } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import {
+  NotificationStore,
+  NotificationType,
+} from '../../../store/notification.store';
 
 @Component({
-  selector: 'app-login',
   standalone: true,
+  selector: 'app-login',
   imports: [CommonModule, RouterModule, FontAwesomeModule, ReactiveFormsModule],
   templateUrl: './login.component.html',
   styleUrl: '../auth.css',
@@ -17,6 +21,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 export class LoginComponent {
   pswIcon = faLock;
   userIcon = faUser;
+  notificationStore = inject(NotificationStore);
   fb = inject(FormBuilder);
   destroy = inject(DestroyRef);
   authService = inject(AuthService);
@@ -34,6 +39,16 @@ export class LoginComponent {
       .subscribe({
         next: () => {
           this.router.navigate(['/']);
+          this.notificationStore.notify(
+            'Logged In Successfully',
+            NotificationType.SUCCESS
+          );
+        },
+        error: () => {
+          this.notificationStore.notify(
+            'Invalid Credentials',
+            NotificationType.ERROR
+          );
         },
       });
   }
