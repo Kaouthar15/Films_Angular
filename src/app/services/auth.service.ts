@@ -1,6 +1,11 @@
 import { Injectable, signal, WritableSignal, inject } from '@angular/core';
 import { toObservable } from '@angular/core/rxjs-interop';
-import { CurrentUser } from '../models/current-user.model';
+import {
+  AuthResponse,
+  CurrentUser,
+  LoginPayload,
+  LogoutResponse,
+} from '../models/user.model';
 import {
   catchError,
   filter,
@@ -12,30 +17,13 @@ import {
   throwError,
 } from 'rxjs';
 import { environment } from '../../environment/environment';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 
-export interface LogoutResponse {
-  message: string;
-}
-
-export interface AuthResponse {
-  jwt: string;
-  user: CurrentUser;
-}
-
-export interface LoginPayload {
-  username: string;
-  password: string;
-}
-
-const http_header = new HttpHeaders({
-  Headers: 'Access-Control-Allow-Origin : http://localhost:4200',
-});
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  currentUser: WritableSignal<CurrentUser | null | undefined> =
+  private currentUser: WritableSignal<CurrentUser | null | undefined> =
     signal(undefined);
   user$ = toObservable(this.currentUser);
 
@@ -48,20 +36,11 @@ export class AuthService {
     return Promise.resolve();
   }
 
-  constructor() {
-    this.user$
-      .pipe(
-        filter(
-          (user): user is CurrentUser => user !== null && user !== undefined
-        ),
-        take(1)
-      )
-      .subscribe();
-  }
   getCurrentUser(): Observable<CurrentUser> {
-    return this.http.get<CurrentUser>(`${environment.API_URL}/auth/user`).pipe(
+    return this.http.post<CurrentUser>(`${environment.API_URL}/user`, {}).pipe(
       tap((response) => {
         this.currentUser.set(response);
+        console.log(response);
       }),
       catchError((error) => {
         localStorage.removeItem('accessToken');
@@ -72,15 +51,20 @@ export class AuthService {
     );
   }
 
+  constructor() {
+    this.user$
+      .pipe(
+        filter(
+          (user): user is CurrentUser => user !== null && user !== undefined
+        ),
+        take(1)
+      )
+      .subscribe();
+  }
+
   login(formData: LoginPayload): Observable<AuthResponse> {
     return this.http
-      .post<AuthResponse>(
-        `${environment.API_URL}/auth/authenticate`,
-        formData,
-        {
-          headers: http_header,
-        }
-      )
+      .post<AuthResponse>(`${environment.API_URL}/authenticate`, formData)
       .pipe(
         tap((response) => {
           this.setAccessToken(response.jwt);
@@ -91,7 +75,7 @@ export class AuthService {
 
   register(formData: CurrentUser): Observable<AuthResponse> {
     return this.http
-      .post<AuthResponse>(`${environment.API_URL}/auth/register`, formData)
+      .post<AuthResponse>(`${environment.API_URL}/register`, formData)
       .pipe(
         tap((response) => {
           this.setAccessToken(response.jwt);
@@ -101,20 +85,9 @@ export class AuthService {
   }
 
   logout(): Observable<LogoutResponse> {
-    return this.http
-      .post<LogoutResponse>(`${environment.API_URL}/auth/logout`, {})
-      .pipe(
-        tap((_response) => {
-          this.currentUser.set(null);
-          localStorage.removeItem('accessToken');
-          localStorage.removeItem('cartItems');
-        }),
-        catchError((_err) => {
-          localStorage.removeItem('accessToken');
-          localStorage.removeItem('cartItems');
-          return of();
-        })
-      );
+    localStorage.removeItem('accessToken');
+    this.currentUser.set(null);
+    return of({ message: 'logged out' });
   }
 
   setAccessToken(token: string): void {

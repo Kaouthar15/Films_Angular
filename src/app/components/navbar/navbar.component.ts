@@ -15,6 +15,7 @@ import {
   WritableSignal,
 } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-navbar',
@@ -25,6 +26,7 @@ import { Router, RouterModule } from '@angular/router';
 export class NavbarComponent {
   destroy = inject(DestroyRef);
   router = inject(Router);
+  authService = inject(AuthService);
 
   isMenuOpen: WritableSignal<boolean> = signal(false);
 
@@ -45,16 +47,7 @@ export class NavbarComponent {
   }
 
   logout() {
-    // this.authService
-    //   .logout()
-    //   .pipe(takeUntilDestroyed(this.destroy))
-    //   .subscribe((response) => {
-    //     this.router.navigate(['/']);
-    //     this.notificationStore.notify(
-    //       response.message,
-    //       NotificationType.SUCCESS
-    //     );
-    //   });
+    this.authService.logout().subscribe();
   }
 
   @HostListener('document:scroll')

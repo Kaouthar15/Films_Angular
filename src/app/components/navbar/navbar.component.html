@@ -47,6 +47,7 @@
                         Ratings
                   </a>
             </li>
+            @if (!(authService.user$ | async)) {
 
             <li>
                   <a routerLink="/signup"
@@ -54,12 +55,15 @@
                         signup
                   </a>
             </li>
-            <!-- <li>
+            }@else {
+
+            <li>
                   <button (click)="logout()"
                         class="flex text-md font-semibold bg-blue-400 text-blue-900 px-4 py-2 rounded-md hover:bg-blue-300 transition-colors w-full">
                         logout
                   </button>
-            </li> -->
+            </li>
+            }
       </ul>
 
       <!-- Side Menu -->

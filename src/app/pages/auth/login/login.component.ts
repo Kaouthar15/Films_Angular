@@ -23,7 +23,7 @@ export class LoginComponent {
   router = inject(Router);
 
   loginForm = this.fb.nonNullable.group({
-    username: ['', Validators.required],
+    email: ['', Validators.required],
     password: ['', Validators.required],
   });
 
@@ -33,10 +33,6 @@ export class LoginComponent {
       .pipe(takeUntilDestroyed(this.destroy))
       .subscribe({
         next: () => {
-          // this.notificationStore.notify(
-          //   "You're logged in successfully",
-          //   NotificationType.SUCCESS
-          // );
           this.router.navigate(['/']);
         },
       });

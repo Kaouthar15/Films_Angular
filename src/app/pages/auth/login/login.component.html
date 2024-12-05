@@ -6,18 +6,18 @@
                   Login to Your Account
             </h2>
             <div class="mb-5">
-                  <label class="block text-gray-800 text-xs font-bold mb-1" for="username">Username</label>
+                  <label class="block text-gray-800 text-xs font-bold mb-1" for="email">Email</label>
                   <div class="relative">
                         <fa-icon [icon]="userIcon"
                               class="absolute top-1/2 transform -translate-y-1/2 left-2 text-gray-500"></fa-icon>
-                        <input type="text" id="username" formControlName="username"
+                        <input type="text" id="email" formControlName="email"
                               class="w-full pl-8 pr-2 py-1.5 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                              placeholder="Enter your username" />
+                              placeholder="Enter your email" />
                   </div>
                   <div class="text-red-500 text-xs h-2">
-                        @if(isInvalidInput('username')){
-                        <span class="block" *ngIf="loginForm.get('username')?.hasError('required')">
-                              Username is required.
+                        @if(isInvalidInput('email')){
+                        <span class="block" *ngIf="loginForm.get('email')?.hasError('required')">
+                              Email is required.
                         </span>
                         }
 
