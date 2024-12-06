@@ -23,7 +23,7 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root',
 })
 export class AuthService {
-  private currentUser: WritableSignal<CurrentUser | null | undefined> =
+  private readonly currentUser: WritableSignal<CurrentUser | null | undefined> =
     signal(undefined);
   user$ = toObservable(this.currentUser);
 

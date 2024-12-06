@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { authGuard } from './guards/auth.guard';
 
 export const routes: Routes = [
   {
@@ -8,13 +9,13 @@ export const routes: Routes = [
   },
   {
     path: 'home',
-    title: 'CinemaFlow - Home',
+    title: 'FilmSpot - Home',
     loadComponent: () =>
       import('./pages/home/home.component').then((m) => m.HomeComponent),
   },
   {
     path: 'actors',
-    title: 'CinemaFlow - Actors',
+    title: 'FilmSpot - Actors',
     loadComponent: () =>
       import('./pages/actor/actors/actors.component').then(
         (m) => m.ActorsComponent
@@ -22,7 +23,7 @@ export const routes: Routes = [
   },
   {
     path: 'directors',
-    title: 'CinemaFlow - Directors',
+    title: 'FilmSpot - Directors',
     loadComponent: () =>
       import('./pages/director/directors/directors.component').then(
         (m) => m.DirectorsComponent
@@ -30,7 +31,7 @@ export const routes: Routes = [
   },
   {
     path: 'films',
-    title: 'CinemaFlow - Films',
+    title: 'FilmSpot - Films',
     loadComponent: () =>
       import('./pages/film/films/films.component').then(
         (m) => m.FilmsComponent
@@ -38,7 +39,7 @@ export const routes: Routes = [
   },
   {
     path: 'ratings',
-    title: 'CinemaFlow - Ratings',
+    title: 'FilmSpot - Ratings',
     loadComponent: () =>
       import('./pages/rating/ratings/ratings.component').then(
         (m) => m.RatingsComponent
@@ -50,8 +51,8 @@ export const routes: Routes = [
       import('./pages/auth/login/login.component').then(
         (m) => m.LoginComponent
       ),
-    title: 'book store - login',
-    // canActivate: [authGuard],
+    title: 'FilmSpot - login',
+    canActivate: [authGuard],
   },
   {
     path: 'signup',
@@ -59,7 +60,7 @@ export const routes: Routes = [
       import('./pages/auth/signup/signup.component').then(
         (m) => m.SignupComponent
       ),
-    title: 'book store - signup',
-    // canActivate: [authGuard],
+    title: 'FilmSpot - signup',
+    canActivate: [authGuard],
   },
 ];

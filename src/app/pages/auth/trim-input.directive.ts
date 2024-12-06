@@ -6,7 +6,10 @@ import { ControlValueAccessor, NgControl } from '@angular/forms';
   standalone: true,
 })
 export class TrimInputDirective {
-  constructor(private ngControl: NgControl, private el: ElementRef) {
+  constructor(
+    private readonly ngControl: NgControl,
+    private readonly el: ElementRef
+  ) {
     trimValueAccessor(ngControl.valueAccessor as ControlValueAccessor);
   }
 

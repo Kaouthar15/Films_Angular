@@ -1,12 +1,62 @@
-<div class="home-container">
-    <header class="home-header">
-      <h1>FilmSpot</h1>
-      <p>Your ultimate movie guide</p>
-    </header>
-  
-    <section class="home-content">
-      <p>Discover the latest films, reviews, and more!</p>
-      <button routerLink="/films" class="explore-button">Explore Films</button>
-    </section>
-  </div>
-  
+<div class="text-center p-5">
+  <header class="bg-gradient-to-br from-blue-400 to-violet-400 p-10 rounded-lg mb-10 text-white">
+    <h1 class="text-6xl m-0 font-bold">FilmSpot</h1>
+    <p class="text-xl mt-2">Your ultimate movie guide</p>
+    <p class="text-2xl mb-5 text-blue-900 font-bold mt-4">Discover the latest films, reviews, and more!</p>
+    <button routerLink="/films"
+      class="text-xl py-3 px-6 bg-blue-900 text-blue-200 rounded-lg uppercase font-bold transition-colors duration-300 ease-in-out shadow-lg hover:bg-blue-700">
+      Explore Films
+    </button>
+  </header>
+
+  <section class="my-5">
+
+    <h1 class="text-4xl text-gray-800 font-bold mb-6">Upcoming Screenings</h1>
+
+    @let screeningsList = (screeningService.screenings$|async);
+    <div class="max-w-4xl mx-auto my-6">
+      @if (screeningsList) {
+
+      <p-carousel [value]="screeningsList" [numVisible]="3" [numScroll]="1" [circular]="false"
+        [styleClass]="'carousel-container mx-auto px-4'" [responsiveOptions]="responsiveOptions">
+        <ng-template let-screening pTemplate="item">
+          <div class="border mb-3 border-gray-200 rounded-lg shadow-lg bg-slate-100 max-w-sm mx-3">
+            <div class="mb-4">
+              <div class="relative">
+                <!-- Film Image -->
+                <img [src]="serverUrl + screening.film.imageUrl" [alt]="screening.film.title"
+                  class="w-full h-auto max-h-72 object-contain rounded-t-lg image" />
+                <!-- Hall Number -->
+                <div class="absolute top-2 left-2 px-2 py-1 bg-blue-500 text-white text-xs rounded">
+                  Hall: {{ screening.hall.number }}
+                </div>
+              </div>
+            </div>
+            <!-- Film Title -->
+            <h3 class="mb-4 text-xl font-semibold text-gray-800 text-center">
+              {{ screening.film.title }}
+            </h3>
+            <!-- Start and End Times -->
+            <div class="mb-2 text-sm text-gray-600 text-center mb-5">
+              <strong>Start:</strong> {{ screening.startTime | date: 'short' }}
+            </div>
+            <!-- <div class="mb-2 text-sm text-gray-600 text-center">
+              <strong>End:</strong> {{ screening.endTime | date: 'short' }}
+            </div> -->
+            <!-- Action Buttons -->
+            <!-- <div class="flex justify-between items-center mt-4">
+        <button class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition">
+          <i class="pi pi-info-circle mr-2"></i>Details
+        </button>
+        <button class="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600 transition">
+          <i class="pi pi-ticket mr-2"></i>Book
+        </button>
+      </div> -->
+          </div>
+        </ng-template>
+      </p-carousel>
+
+      }
+    </div>
+  </section>
+</div>

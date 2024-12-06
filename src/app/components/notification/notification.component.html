@@ -1,7 +1,7 @@
-@let nList = notifications();
-@if(nList !== []){
+@let list = notifications();
+@if(list !== []){
 <div class="notifications-container ">
-      @for(notification of nList; track notification.id ){
+      @for(notification of list; track notification.id ){
       @if(notification.message && notification.type && notification.id !== null && notification.id !== undefined){
 
       <div class="notification" [ngClass]="getNotificationClass(notification.type)">

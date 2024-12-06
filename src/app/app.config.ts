@@ -1,7 +1,6 @@
 import {
   APP_INITIALIZER,
   ApplicationConfig,
-  inject,
   provideZoneChangeDetection,
 } from '@angular/core';
 import { provideRouter } from '@angular/router';
@@ -11,11 +10,16 @@ import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { AuthService } from './services/auth.service';
 import { authInterceptor } from './interceptors/auth.interceptor';
 
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { providePrimeNG } from 'primeng/config';
+
 export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
     provideHttpClient(withInterceptors([authInterceptor])),
+    provideAnimationsAsync(),
+    providePrimeNG(),
     {
       provide: APP_INITIALIZER,
       useFactory: (authService: AuthService) => async () => {
