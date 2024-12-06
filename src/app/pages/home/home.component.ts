@@ -1,4 +1,10 @@
-import { Component, inject, OnInit } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  inject,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { ScreeningService } from '../../services/screening.service';
 import { AsyncPipe, CommonModule } from '@angular/common';
 import { CarouselModule } from 'primeng/carousel';
@@ -6,6 +12,8 @@ import { ButtonModule } from 'primeng/button';
 import { TagModule } from 'primeng/tag';
 import { environment } from '../../../environment/environment';
 import { RouterModule } from '@angular/router';
+import { faArrowDown } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @Component({
   standalone: true,
@@ -17,6 +25,7 @@ import { RouterModule } from '@angular/router';
     TagModule,
     ButtonModule,
     RouterModule,
+    FontAwesomeModule,
   ],
   providers: [ScreeningService],
 
@@ -27,6 +36,8 @@ export class HomeComponent implements OnInit {
   screeningService = inject(ScreeningService);
 
   serverUrl = environment.SERVER_URL;
+
+  downArrowIcon = faArrowDown;
 
   responsiveOptions = [
     {
@@ -46,6 +57,12 @@ export class HomeComponent implements OnInit {
     },
   ];
 
+  @ViewChild('upcomingScreenings') upcomingScreenings!: ElementRef;
+  scrollToUpcomingScreenings() {
+    this.upcomingScreenings.nativeElement.scrollIntoView({
+      behavior: 'smooth',
+    });
+  }
   ngOnInit(): void {
     this.screeningService.getUpcomingScreening();
   }

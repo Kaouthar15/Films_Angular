@@ -1,17 +1,27 @@
 <div class="text-center p-5">
-  <header class="bg-gradient-to-br from-blue-400 to-violet-400 p-10 rounded-lg mb-10 text-white">
+  <header
+    class="relative bg-gradient-to-br from-blue-100 to-violet-100 p-10 rounded-lg mb-10 text-blue-500 min-h-[calc(100vh-6rem)] flex flex-col justify-center items-center">
     <h1 class="text-6xl m-0 font-bold">FilmSpot</h1>
     <p class="text-xl mt-2">Your ultimate movie guide</p>
     <p class="text-2xl mb-5 text-blue-900 font-bold mt-4">Discover the latest films, reviews, and more!</p>
-    <button routerLink="/films"
-      class="text-xl py-3 px-6 bg-blue-900 text-blue-200 rounded-lg uppercase font-bold transition-colors duration-300 ease-in-out shadow-lg hover:bg-blue-700">
-      Explore Films
+    <div class="w-full">
+      <button routerLink="/films"
+        class="text-xl py-3 px-6 bg-blue-900 text-blue-200 rounded-lg uppercase font-bold transition-colors duration-300 ease-in-out shadow-lg hover:bg-blue-800">
+        Explore Films
+      </button>
+
+    </div>
+    <button class="font-bold text-xl absolute bottom-4 right-4 flex justify-center gap-1"
+      (click)="scrollToUpcomingScreenings()">
+      <fa-icon [icon]="downArrowIcon"></fa-icon>
+      See Upcoming Screenings
     </button>
+
   </header>
 
-  <section class="my-5">
+  <section id="upcomingScreenings" #upcomingScreenings class="min-h-screen pt-8 flex flex-col justify-center">
 
-    <h1 class="text-4xl text-gray-800 font-bold mb-6">Upcoming Screenings</h1>
+    <h1 class="text-4xl text-gray-800 font-bold my-6">Upcoming Screenings</h1>
 
     @let screeningsList = (screeningService.screenings$|async);
     <div class="max-w-4xl mx-auto my-6">
@@ -40,18 +50,7 @@
             <div class="mb-2 text-sm text-gray-600 text-center mb-5">
               <strong>Start:</strong> {{ screening.startTime | date: 'short' }}
             </div>
-            <!-- <div class="mb-2 text-sm text-gray-600 text-center">
-              <strong>End:</strong> {{ screening.endTime | date: 'short' }}
-            </div> -->
-            <!-- Action Buttons -->
-            <!-- <div class="flex justify-between items-center mt-4">
-        <button class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition">
-          <i class="pi pi-info-circle mr-2"></i>Details
-        </button>
-        <button class="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600 transition">
-          <i class="pi pi-ticket mr-2"></i>Book
-        </button>
-      </div> -->
+
           </div>
         </ng-template>
       </p-carousel>
