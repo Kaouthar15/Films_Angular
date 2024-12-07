@@ -1,10 +1,46 @@
-import { Component } from '@angular/core';
+import { Component, inject, model } from '@angular/core';
+import { FilmService } from '../../../services/film.service';
+import { AsyncPipe, CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { environment } from '../../../../environment/environment';
+import {
+  faChevronLeft,
+  faChevronRight,
+} from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @Component({
   standalone: true,
   selector: 'app-films',
-  imports: [],
+  imports: [CommonModule, FormsModule, AsyncPipe, FontAwesomeModule],
+  providers: [FilmService],
   templateUrl: './films.component.html',
   styleUrl: './films.component.css',
 })
-export class FilmsComponent {}
+export class FilmsComponent {
+  filmService = inject(FilmService);
+
+  genres$ = this.filmService.genres$;
+  films$ = this.filmService.films$;
+
+  genreModel = model<string>('');
+  keywordModel = model<string>('');
+
+  serverUrl = environment.SERVER_URL;
+
+  nextIcon = faChevronRight;
+
+  previousIcon = faChevronLeft;
+
+  onKeywordChange() {
+    this.filmService.updateKeyword(this.keywordModel());
+  }
+
+  onGenreChange() {
+    this.filmService.updateSelectedGenre(this.genreModel());
+  }
+
+  onPageChange(change: number) {
+    this.filmService.updateFilmsPage(change);
+  }
+}

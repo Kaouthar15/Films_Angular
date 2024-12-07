@@ -12,7 +12,11 @@ import { ButtonModule } from 'primeng/button';
 import { TagModule } from 'primeng/tag';
 import { environment } from '../../../environment/environment';
 import { RouterModule } from '@angular/router';
-import { faArrowDown } from '@fortawesome/free-solid-svg-icons';
+import {
+  faArrowDown,
+  faChevronLeft,
+  faChevronRight,
+} from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @Component({
@@ -32,12 +36,16 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent {
   screeningService = inject(ScreeningService);
 
   serverUrl = environment.SERVER_URL;
 
   downArrowIcon = faArrowDown;
+
+  nextIcon = faChevronRight;
+
+  previousIcon = faChevronLeft;
 
   responsiveOptions = [
     {
@@ -62,8 +70,5 @@ export class HomeComponent implements OnInit {
     this.upcomingScreenings.nativeElement.scrollIntoView({
       behavior: 'smooth',
     });
-  }
-  ngOnInit(): void {
-    this.screeningService.getUpcomingScreening();
   }
 }

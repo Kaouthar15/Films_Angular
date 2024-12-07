@@ -1,1 +1,65 @@
-<p>films works!</p>
+<div class="film-search-container flex gap-4 p-6 bg-gray-100 rounded-md shadow-md">
+      <!-- Search Bar -->
+      <input type="text" placeholder="Search films by title"
+            class="search-bar px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+            [(ngModel)]="keywordModel" (input)="onKeywordChange()" />
+
+      <!-- Genre Dropdown -->
+      <select
+            class="genre-dropdown px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+            (change)="onGenreChange()" [(ngModel)]="genreModel">
+            <option value="">All Genres</option>
+            @for (genre of genres$ | async; track $index) {
+            <option [value]="genre.label">
+                  {{ genre.label }}
+            </option>
+            }
+      </select>
+</div>
+
+<!-- Films List -->
+<div class="grid grid-cols-[repeat(auto-fill,minmax(200px,1fr))] gap-5 mt-6 p-5">
+      @let filmResponse = (films$ | async)?._embedded?.films;
+      @for (film of filmResponse; track $index) {
+      <div class="film-card bg-white rounded-lg shadow-md overflow-hidden">
+            <img [src]="serverUrl+film.imageUrl" alt="{{ film.title }}" class="film-image w-full object-cover" />
+            <div class="film-details p-4">
+                  <h3 class="text-lg font-bold">{{ film.title }} ({{ film.year }})</h3>
+                  <p class="text-sm text-gray-600">Duration: {{ film.duration }} min</p>
+                  @let screenings = film._embedded?.screenings;
+                  @if (screenings) {
+                  @let nextScreening = screenings[0];
+                  <p class="text-sm text-blue-600">
+                        Next Screening: {{ nextScreening.startTime | date: 'short' }}
+                  </p>
+                  }
+            </div>
+      </div>
+      }
+</div>
+
+<!-- Pagination Controls -->
+<div class="pagination flex justify-center items-center gap-4 my-6">
+      @let filmPage = (films$|async)?.page;
+      @if(filmPage){
+
+      <!-- Previous Button -->
+      <button (click)="onPageChange(-1)"
+            class="page-btn px-4 py-2 bg-gray-400 text-white rounded-md shadow hover:bg-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-400 disabled:bg-gray-300 disabled:cursor-not-allowed"
+            [disabled]="filmPage.number === 0">
+            <fa-icon [icon]="previousIcon"></fa-icon>
+      </button>
+
+      <!-- Page Information -->
+      <span class="text-gray-700 text-sm">
+            Page {{ filmPage.number + 1 }} of {{ filmPage.totalPages }}
+      </span>
+
+      <!-- Next Button -->
+      <button (click)="onPageChange(1)"
+            class="page-btn px-4 py-2 bg-blue-400 text-white rounded-md shadow hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-400 disabled:bg-blue-300 disabled:cursor-not-allowed"
+            [disabled]="filmPage.number + 1 === filmPage.totalPages">
+            <fa-icon [icon]="nextIcon"></fa-icon>
+      </button>
+      }
+</div>
