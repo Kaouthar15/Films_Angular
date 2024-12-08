@@ -1,3 +1,5 @@
+import { Film } from './film.model';
+
 export interface ScreeningResponse {
   _embedded: {
     screenings: Screening[];
@@ -19,15 +21,6 @@ export interface Screening {
   id: number;
   film: Film;
   hall: Hall;
-}
-
-export interface Film {
-  createdAt: string; // ISO 8601 datetime string
-  updatedAt: string; // ISO 8601 datetime string
-  title: string;
-  duration: number; // in minutes
-  imageUrl: string;
-  year: number; // release year
 }
 
 export interface Hall {

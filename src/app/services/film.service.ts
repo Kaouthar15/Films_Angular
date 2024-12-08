@@ -40,13 +40,26 @@ export class FilmService {
         {
           params: {
             keyword: keyword || '',
-            genreLabel: genre ? genre : '',
+            genreLabel: genre ?? '',
             page: page.toString(),
           },
         }
       )
     )
   );
+
+  rateFilm(
+    customerUrl: string,
+    filmUrl: string,
+    score: number
+  ): Observable<any> {
+    const payload = {
+      customer: customerUrl,
+      film: filmUrl,
+      score,
+    };
+    return this.http.post(`${environment.API_URL}/film-ratings`, payload);
+  }
 
   // Methods to update filters
   updateKeyword(keyword: string) {

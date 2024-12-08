@@ -27,6 +27,7 @@ export interface Film {
   title: string;
   duration: number;
   imageUrl: string;
+  description: string;
   year: number;
   _embedded?: FilmEmbedded;
   _links?: FilmLinks;

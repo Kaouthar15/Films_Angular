@@ -33,6 +33,7 @@
                         Next Screening: {{ nextScreening.startTime | date: 'short' }}
                   </p>
                   }
+                  <button (click)="viewFilmDetails(film)">view details</button>
             </div>
       </div>
       }
@@ -63,3 +64,9 @@
       </button>
       }
 </div>
+
+@let selected = selectedFilm();
+@if(selected){
+<app-film-details [(visible)]="filmDialogVisible" [film]="selected">
+</app-film-details>
+}
