@@ -3,6 +3,10 @@
 @tailwind components;
 @tailwind utilities;
 
+.p-dialog-mask {
+  background-color: #00000059 !important;
+}
+
 .fade-in {
   animation: fadeIn 0.5s forwards;
 }

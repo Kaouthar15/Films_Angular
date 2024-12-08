@@ -87,6 +87,7 @@ import {
       </ng-container>
     </p-dialog>
   `,
+  styles: [``],
 })
 export class FilmDetailsComponent {
   @Input() visible!: boolean;

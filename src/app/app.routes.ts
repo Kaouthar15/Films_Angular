@@ -13,22 +13,7 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./pages/home/home.component').then((m) => m.HomeComponent),
   },
-  {
-    path: 'actors',
-    title: 'FilmSpot - Actors',
-    loadComponent: () =>
-      import('./pages/actor/actors/actors.component').then(
-        (m) => m.ActorsComponent
-      ),
-  },
-  {
-    path: 'directors',
-    title: 'FilmSpot - Directors',
-    loadComponent: () =>
-      import('./pages/director/directors/directors.component').then(
-        (m) => m.DirectorsComponent
-      ),
-  },
+
   {
     path: 'films',
     title: 'FilmSpot - Films',
@@ -37,14 +22,7 @@ export const routes: Routes = [
         (m) => m.FilmsComponent
       ),
   },
-  {
-    path: 'ratings',
-    title: 'FilmSpot - Ratings',
-    loadComponent: () =>
-      import('./pages/rating/ratings/ratings.component').then(
-        (m) => m.RatingsComponent
-      ),
-  },
+
   {
     path: 'login',
     loadComponent: () =>
@@ -62,5 +40,13 @@ export const routes: Routes = [
       ),
     title: 'FilmSpot - signup',
     canActivate: [authGuard],
+  },
+  {
+    path: '**',
+    title: 'FilmSpot - 404',
+    loadComponent: () =>
+      import('./pages/error-page/error-page/error-page.component').then(
+        (m) => m.ErrorPageComponent
+      ),
   },
 ];

@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { BehaviorSubject, map, tap } from 'rxjs';
-import { Screening, ScreeningResponse } from '../models/screening.model';
+import { map } from 'rxjs';
+import { ScreeningResponse } from '../models/screening.model';
 import { environment } from '../../environment/environment';
 
 @Injectable()
