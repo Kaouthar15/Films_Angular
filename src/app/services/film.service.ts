@@ -13,6 +13,7 @@ import {
 import { FilmsResponse } from '../models/film.model';
 import { environment } from '../../environment/environment';
 import { GenreResponse } from '../models/genre.model';
+import { FilmRatingPayload } from '../models/rating.model';
 @Injectable()
 export class FilmService {
   http = inject(HttpClient);
@@ -48,14 +49,9 @@ export class FilmService {
     )
   );
 
-  rateFilm(
-    customerUrl: string,
-    filmUrl: string,
-    score: number
-  ): Observable<any> {
-    const payload = {
-      customer: customerUrl,
-      film: filmUrl,
+  rateFilm(film: string, score: number): Observable<any> {
+    const payload: FilmRatingPayload = {
+      film: film,
       score,
     };
     return this.http.post(`${environment.API_URL}/film-ratings`, payload);

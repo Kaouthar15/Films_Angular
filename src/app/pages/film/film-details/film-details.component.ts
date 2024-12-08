@@ -87,7 +87,6 @@ import {
       </ng-container>
     </p-dialog>
   `,
-  styles: [``],
 })
 export class FilmDetailsComponent {
   @Input() visible!: boolean;
@@ -96,7 +95,7 @@ export class FilmDetailsComponent {
 
   @Input() film!: Film | null;
 
-  @Input() customerUrl!: string;
+  // @Input() customerUrl!: string;
 
   notificationStore = inject(NotificationStore);
 
@@ -110,17 +109,25 @@ export class FilmDetailsComponent {
 
   submitRating() {
     if (this.film && this.score() > 0) {
-      this.filmService
-        .rateFilm(this.customerUrl, this.film._links!.self.href, this.score())
-        .subscribe(() => {
+      this.filmService.rateFilm(this.film.title, this.score()).subscribe({
+        next: () => {
           this.notificationStore.notify(
             'Rating submitted successfully',
             NotificationType.SUCCESS
           );
           this.closeDialog();
-        });
+        },
+        error: () =>
+          this.notificationStore.notify(
+            'You need to signup first',
+            NotificationType.ERROR
+          ),
+      });
     } else {
-      alert('Please select a rating before submitting.');
+      this.notificationStore.notify(
+        'Please select a rating',
+        NotificationType.INFO
+      );
     }
   }
 

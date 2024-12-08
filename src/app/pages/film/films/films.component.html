@@ -29,11 +29,12 @@
                   @let screenings = film._embedded?.screenings;
                   @if (screenings) {
                   @let nextScreening = screenings[0];
-                  <p class="text-sm text-blue-600">
+                  <p class="text-xs text-blue-900">
                         Next Screening: {{ nextScreening.startTime | date: 'short' }}
                   </p>
                   }
-                  <button (click)="viewFilmDetails(film)">view details</button>
+                  <button (click)="viewFilmDetails(film)" class="text-blue-500 hover:underline focus:outline-none">view
+                        details</button>
             </div>
       </div>
       }

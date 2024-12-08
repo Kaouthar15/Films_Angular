@@ -47,7 +47,7 @@ export class NotificationComponent implements OnInit {
 
   notificationClassMap = new Map<string, string>([
     ['ERROR', 'bg-red-300 text-red-800'],
-    ['INFO', 'bg-celeste-light text-night-dark'],
+    ['INFO', 'bg-blue-200 text-night-dark'],
     ['SUCCESS', 'bg-green-300 text-green-800'],
   ]);
 
