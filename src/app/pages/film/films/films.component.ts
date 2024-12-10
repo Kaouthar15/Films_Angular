@@ -42,6 +42,8 @@ export class FilmsComponent {
   genreModel = model<string>('');
   keywordModel = model<string>('');
 
+  isFilmsLoading = this.filmService.isLoading$;
+
   serverUrl = environment.SERVER_URL;
 
   nextIcon = faChevronRight;

@@ -7,8 +7,8 @@ import {
   distinctUntilChanged,
   map,
   Observable,
-  Subject,
   switchMap,
+  tap,
 } from 'rxjs';
 import { FilmsResponse } from '../models/film.model';
 import { environment } from '../../environment/environment';
@@ -18,9 +18,13 @@ import { FilmRatingPayload } from '../models/rating.model';
 export class FilmService {
   http = inject(HttpClient);
 
-  private filmsPage = new BehaviorSubject<number>(0);
-  private selectedGenre = new BehaviorSubject<string | null>(null);
-  private keyword = new BehaviorSubject<string>('');
+  private readonly filmsPage = new BehaviorSubject<number>(0);
+  private readonly selectedGenre = new BehaviorSubject<string | null>(null);
+  private readonly keyword = new BehaviorSubject<string>('');
+
+  private readonly loadingSubject = new BehaviorSubject<boolean>(false);
+
+  isLoading$ = this.loadingSubject.asObservable();
 
   // Fetch genres
   genres$ = this.http
@@ -35,6 +39,7 @@ export class FilmService {
     this.selectedGenre.pipe(distinctUntilChanged()),
     this.filmsPage.pipe(distinctUntilChanged()),
   ]).pipe(
+    tap(() => this.loadingSubject.next(true)),
     switchMap(([keyword, genre, page]) =>
       this.http.get<FilmsResponse>(
         `${environment.API_URL}/films/search/findByTitleAndGenre`,
@@ -46,7 +51,8 @@ export class FilmService {
           },
         }
       )
-    )
+    ),
+    tap(() => this.loadingSubject.next(false))
   );
 
   rateFilm(film: string, score: number): Observable<any> {
