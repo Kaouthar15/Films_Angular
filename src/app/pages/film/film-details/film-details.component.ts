@@ -96,8 +96,6 @@ export class FilmDetailsComponent {
 
   @Input() film!: Film | null;
 
-  // @Input() customerUrl!: string;
-
   notificationStore = inject(NotificationStore);
 
   closeIcon = faXmark;
