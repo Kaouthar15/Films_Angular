@@ -5,6 +5,7 @@ import {
   combineLatest,
   debounceTime,
   distinctUntilChanged,
+  finalize,
   map,
   Observable,
   switchMap,
@@ -24,7 +25,9 @@ export class FilmService {
 
   private readonly loadingSubject = new BehaviorSubject<boolean>(false);
 
-  isLoading$ = this.loadingSubject.asObservable();
+  isLoading$ = this.loadingSubject
+    .asObservable()
+    .pipe(tap((v) => console.log('loading =>', v)));
 
   // Fetch genres
   genres$ = this.http
@@ -41,18 +44,25 @@ export class FilmService {
   ]).pipe(
     tap(() => this.loadingSubject.next(true)),
     switchMap(([keyword, genre, page]) =>
-      this.http.get<FilmsResponse>(
-        `${environment.API_URL}/films/search/findByTitleAndGenre`,
-        {
-          params: {
-            keyword: keyword || '',
-            genreLabel: genre ?? '',
-            page: page.toString(),
-          },
-        }
-      )
-    ),
-    tap(() => this.loadingSubject.next(false))
+      this.http
+        .get<FilmsResponse>(
+          `${environment.API_URL}/films/search/findByTitleAndGenre`,
+          {
+            params: {
+              keyword: keyword || '',
+              genreLabel: genre ?? '',
+              page: page.toString(),
+            },
+          }
+        )
+        .pipe(
+          // set loading to false when data is retrieved
+          finalize(() => {
+            this.loadingSubject.next(false);
+            console.log('Finalized => executed');
+          })
+        )
+    )
   );
 
   rateFilm(film: string, score: number): Observable<any> {

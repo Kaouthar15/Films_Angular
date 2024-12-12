@@ -1,10 +1,4 @@
-import {
-  Component,
-  ElementRef,
-  inject,
-  OnInit,
-  ViewChild,
-} from '@angular/core';
+import { Component, ElementRef, inject, ViewChild } from '@angular/core';
 import { ScreeningService } from '../../services/screening.service';
 import { AsyncPipe, CommonModule } from '@angular/common';
 import { CarouselModule } from 'primeng/carousel';

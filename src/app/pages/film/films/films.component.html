@@ -18,6 +18,7 @@
 </div>
 
 <!-- Display placeholder while films are loading, otherwise show films -->
+@let filmResponse = (films$ | async)?._embedded?.films;
 @if (isFilmsLoading|async) {
 <div class="grid grid-cols-[repeat(auto-fill,minmax(200px,1fr))] gap-5 mt-6 p-5">
       @for (item of [].constructor(5); track $index) {
@@ -32,9 +33,10 @@
       }
 </div>
 }
+@if(filmResponse){
+
 <!-- Films List -->
 <div class="grid grid-cols-[repeat(auto-fill,minmax(200px,1fr))] gap-5 mt-6 p-5">
-      @let filmResponse = (films$ | async)?._embedded?.films;
       @for (film of filmResponse; track $index) {
       <div class="film-card bg-white rounded-lg shadow-md overflow-hidden">
             <img [src]="serverUrl+film.imageUrl" alt="{{ film.title }}" class="film-image w-full object-cover" />
@@ -54,6 +56,7 @@
       </div>
       }
 </div>
+}
 
 
 

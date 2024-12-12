@@ -36,13 +36,12 @@ export class FilmsComponent {
   filmService = inject(FilmService);
   authService = inject(AuthService);
 
+  isFilmsLoading = this.filmService.isLoading$;
   genres$ = this.filmService.genres$;
   films$ = this.filmService.films$;
 
   genreModel = model<string>('');
   keywordModel = model<string>('');
-
-  isFilmsLoading = this.filmService.isLoading$;
 
   serverUrl = environment.SERVER_URL;
 
