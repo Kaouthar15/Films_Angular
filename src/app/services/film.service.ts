@@ -25,9 +25,7 @@ export class FilmService {
 
   private readonly loadingSubject = new BehaviorSubject<boolean>(false);
 
-  isLoading$ = this.loadingSubject
-    .asObservable()
-    .pipe(tap((v) => console.log('loading =>', v)));
+  isLoading$ = this.loadingSubject.asObservable();
 
   // Fetch genres
   genres$ = this.http
@@ -57,10 +55,7 @@ export class FilmService {
         )
         .pipe(
           // set loading to false when data is retrieved
-          finalize(() => {
-            this.loadingSubject.next(false);
-            console.log('Finalized => executed');
-          })
+          finalize(() => this.loadingSubject.next(false))
         )
     )
   );
