@@ -32,9 +32,8 @@
       </div>
       }
 </div>
-}
+}@else {
 @if(filmResponse){
-
 <!-- Films List -->
 <div class="grid grid-cols-[repeat(auto-fill,minmax(200px,1fr))] gap-5 mt-6 p-5">
       @for (film of filmResponse; track $index) {
@@ -58,7 +57,7 @@
 </div>
 }
 
-
+}
 
 <!-- Pagination Controls -->
 <div class="pagination flex justify-center items-center gap-4 my-6">

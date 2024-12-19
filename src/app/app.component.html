@@ -6,7 +6,7 @@
       @if(!isAuthPage){
       <app-navbar />
       }
-      <main class="min-h-" [class.mt-16.mb-24]="!isAuthPage">
+      <main class="flex-grow" [class.mt-16.mb-24]="!isAuthPage">
             <router-outlet></router-outlet>
       </main>
       @if(!isAuthPage){
