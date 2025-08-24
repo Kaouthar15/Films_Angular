@@ -22,11 +22,16 @@ This is the frontend application for the Films platform, built using **Angular**
    - ![Rate Movies](screenshots/film-detail.png)
 
 4. **User Authentication**
+
    - **Login:** Access your account securely.
      - ![Login](screenshots/login.png)
      - ![Home](screenshots/home.png)
    - **Signup:** Create a new account easily.
      - ![Signup](screenshots/signup.png)
+
+   5. **Mobile Experience**
+      - <img src="screenshots/mobile.png" alt="Mobile View" width="250"/>
+      - <img src="screenshots/mobile-sidebar.png" alt="Mobile Sidebar" width="250"/>
 
 ---
 
