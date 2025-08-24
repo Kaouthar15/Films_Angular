@@ -8,18 +8,25 @@ This is the frontend application for the Films platform, built using **Angular**
 
 1. **Browse Movies**
 
-   - View a list of available movies and their details.  
-     ![Browse Movies](screenshots/browse-movies.png)
+   - View a list of available movies and their details.
+   - ![Browse Movies](screenshots/browse-movies.png)
 
 2. **Upcoming Screenings**
 
-   - Explore upcoming screenings and book tickets.  
-     ![Upcoming Screenings](screenshots/upcoming-screenings.png)
+   - Explore upcoming screenings and book tickets.
+   - ![Upcoming Screenings](screenshots/upcoming-screenings.png)
 
 3. **Rate Movies**
 
-   - Provide ratings and feedback for movies.  
-     ![Rate Movies](screenshots/rate-movies.png)
+   - Provide ratings and feedback for movies.
+   - ![Rate Movies](screenshots/film-detail.png)
+
+4. **User Authentication**
+   - **Login:** Access your account securely.
+     - ![Login](screenshots/login.png)
+     - ![Home](screenshots/home.png)
+   - **Signup:** Create a new account easily.
+     - ![Signup](screenshots/signup.png)
 
 ---
 
