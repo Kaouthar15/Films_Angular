@@ -1,59 +1,39 @@
-# FilmsAngular
+# Films Angular Frontend
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.0.1.
+This is the frontend application for the Films platform, built using **Angular**. It provides a dynamic and responsive interface for customers to explore movies and manage their profiles.
 
-## Development server
+---
 
-To start a local development server, run:
+## Features
 
-```bash
-ng serve
-```
+1. **Browse Movies**
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+   - View a list of available movies and their details.  
+     ![Browse Movies](screenshots/browse-movies.png)
 
-## Code scaffolding
+2. **Upcoming Screenings**
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+   - Explore upcoming screenings and book tickets.  
+     ![Upcoming Screenings](screenshots/upcoming-screenings.png)
 
-```bash
-ng generate component component-name
-```
+3. **Rate Movies**
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+   - Provide ratings and feedback for movies.  
+     ![Rate Movies](screenshots/rate-movies.png)
 
-```bash
-ng generate --help
-```
+---
 
-## Building
+## Technologies Used
 
-To build the project run:
+- **Angular**
+- **TypeScript**
+- **tailwind**
+- **ngrx/signals**
+- **primeNG**
 
-```bash
-ng build
-```
+---
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+## Backend Integration
 
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+This application interacts with the backend API provided by the **Films Spring Boot** project. For more details, visit the backend repository:  
+[Films Spring Boot](https://github.com/Kaouthar15/Films_SpringBoot)
