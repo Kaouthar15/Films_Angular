@@ -1,26 +1,35 @@
-<div class="film-search-container flex gap-4 p-6 bg-white/55 backdrop-blur shadow-md">
-      <!-- Search Bar -->
-      <input type="text" placeholder="Search films by title"
-            class="search-bar px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
-            [(ngModel)]="keywordModel" (input)="onKeywordChange()" />
+<div
+      class="flex gap-4 p-4 fixed top-16 w-full bg-gradient-to-l from-indigo-100/75 to-indigo-200/75 backdrop-blur-lg shadow-sm z-10">
 
-      <!-- Genre Dropdown -->
-      <select
-            class="genre-dropdown px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
-            (change)="onGenreChange()" [(ngModel)]="genreModel">
-            <option value="">All Genres</option>
-            @for (genre of genres$ | async; track $index) {
-            <option [value]="genre.label">
-                  {{ genre.label }}
-            </option>
-            }
-      </select>
+      <!-- container -->
+      <div class="relative flex w-full max-w-md">
+            <!-- icon -->
+            <fa-icon [icon]="searchIcon"
+                  class="absolute top-1/2 left-3 transform -translate-y-1/2 text-indigo-600 pointer-events-none" />
+
+            <!-- Search Bar -->
+            <input type="text" placeholder="Search films by title" [(ngModel)]="keywordModel"
+                  (input)="onKeywordChange()"
+                  class="pl-10 pr-4 py-2 border border-indigo-300 rounded-l-md focus:outline-none focus:ring-2 focus:ring-blue-400 flex-1 min-w-0 bg-indigo-100" />
+
+            <!-- Genre Dropdown -->
+            <select [(ngModel)]="genreModel" (change)="onGenreChange()"
+                  class="px-2 sm:px-4 py-2 border border-indigo-300 border-l-0 rounded-r-md focus:outline-none focus:ring-2 focus:ring-blue-400 bg-indigo-100">
+                  <option value="">All Genres</option>
+                  @for (genre of genres$ | async; track $index) {
+                  <option [value]="genre.label">
+                        {{ genre.label }}
+                  </option>
+                  }
+            </select>
+      </div>
 </div>
+
 
 <!-- Display placeholder while films are loading, otherwise show films -->
 @let filmResponse = (films$ | async)?._embedded?.films;
 @if (isFilmsLoading|async) {
-<div class="grid grid-cols-[repeat(auto-fill,minmax(200px,1fr))] gap-5 mt-6 p-5">
+<div class="grid grid-cols-[repeat(auto-fill,minmax(200px,1fr))] gap-5 mt-16 p-5">
       @for (item of [].constructor(5); track $index) {
       <div class="film-card bg-white/55 rounded-lg shadow-md overflow-hidden animate-pulse">
             <div class="film-image w-full h-60 bg-white/70 backdrop-blur"></div>
@@ -35,7 +44,7 @@
 }@else {
 @if(filmResponse){
 <!-- Films List -->
-<div class="grid grid-cols-[repeat(auto-fill,minmax(200px,1fr))] gap-5 mt-6 p-5">
+<div class="grid grid-cols-[repeat(auto-fill,minmax(200px,1fr))] gap-5 mt-16 p-5">
       @for (film of filmResponse; track $index) {
       <div class="film-card bg-white rounded-lg shadow-md overflow-hidden">
             <img [src]="serverUrl+film.imageUrl" alt="{{ film.title }}" class="film-image w-full object-cover" />

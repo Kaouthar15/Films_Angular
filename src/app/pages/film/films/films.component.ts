@@ -12,6 +12,7 @@ import { environment } from '../../../../environment/environment';
 import {
   faChevronLeft,
   faChevronRight,
+  faSearch,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FilmDetailsComponent } from '../film-details/film-details.component';
@@ -44,6 +45,8 @@ export class FilmsComponent {
   keywordModel = model<string>('');
 
   serverUrl = environment.SERVER_URL;
+
+  searchIcon = faSearch;
 
   nextIcon = faChevronRight;
 
