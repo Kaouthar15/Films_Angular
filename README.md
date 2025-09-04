@@ -18,7 +18,7 @@ This is the frontend application for the Films platform, built using **Angular**
 
 3. **Rate Movies**
 
-   - Provide ratings and feedback for movies.
+   - Provide ratings for movies.
    - ![Rate Movies](screenshots/film-detail.png)
 
 4. **User Authentication**
