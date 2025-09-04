@@ -13,7 +13,7 @@ This is the frontend application for the Films platform, built using **Angular**
 
 2. **Upcoming Screenings**
 
-   - Explore upcoming screenings and book tickets.
+   - Explore upcoming screenings.
    - ![Upcoming Screenings](screenshots/upcoming-screenings.png)
 
 3. **Rate Movies**
